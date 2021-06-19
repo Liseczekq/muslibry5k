@@ -24,6 +24,7 @@ public class Song {
 
     public Song() {
     }
+
     public Song(String title, String genre, String ismn, String year, Publisher publisher) {
         this.title = title;
         this.genre = genre;
