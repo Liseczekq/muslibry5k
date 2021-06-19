@@ -4,7 +4,7 @@ import com.example.muslibry5k.model.Artist;
 import com.example.muslibry5k.model.Publisher;
 import com.example.muslibry5k.model.Song;
 import com.example.muslibry5k.respositories.ArtistRepository;
-import com.example.muslibry5k.respositories.PublisherRespository;
+import com.example.muslibry5k.respositories.PublisherRepository;
 import com.example.muslibry5k.respositories.SongRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DBInflater implements ApplicationListener<ContextRefreshedEvent> {
 
-    public DBInflater(SongRepository songRepository , ArtistRepository artistRepository, PublisherRespository publisherRepository){
+    public DBInflater(SongRepository songRepository , ArtistRepository artistRepository, PublisherRepository publisherRepository){
         this.songRepository = songRepository;
         this.artistRepository=artistRepository;
         this.publisherRepository=publisherRepository;
@@ -21,7 +21,7 @@ public class DBInflater implements ApplicationListener<ContextRefreshedEvent> {
 
     private SongRepository songRepository;
     private ArtistRepository artistRepository;
-    private PublisherRespository publisherRepository;
+    private PublisherRepository publisherRepository;
 
 
     @Override
@@ -35,6 +35,7 @@ public class DBInflater implements ApplicationListener<ContextRefreshedEvent> {
         Song hurt = new Song("Hurt" , "Alternative rock" , "123123134","2003", columbia);
         johnny.getSongs().add(hurt);
         hurt.getArtists().add(johnny);
+        publisherRepository.save(columbia);
         artistRepository.save(johnny);
         songRepository.save(hurt);
 
@@ -44,6 +45,7 @@ public class DBInflater implements ApplicationListener<ContextRefreshedEvent> {
         Song bohemian = new Song("Bohemian Rhapsody","Rock","541312312314","1979",rosen);
         queen.getSongs().add(bohemian);
         bohemian.getArtists().add(queen);
+        publisherRepository.save(rosen);
         artistRepository.save(queen);
         songRepository.save(bohemian);
 
@@ -52,6 +54,7 @@ public class DBInflater implements ApplicationListener<ContextRefreshedEvent> {
         Song yesterday = new Song ("Yesterday","Pop","58123170937123","1965",northern);
         beatles.getSongs().add(yesterday);
         yesterday.getArtists().add(beatles);
+        publisherRepository.save(northern);
         artistRepository.save(beatles);
         songRepository.save(yesterday);
 
