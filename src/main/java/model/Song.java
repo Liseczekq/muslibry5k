@@ -1,3 +1,4 @@
+
 package model;
 
 import javax.persistence.*;
@@ -6,7 +7,7 @@ import java.util.Set;
 
 @Entity
 public class Song {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -15,31 +16,28 @@ public class Song {
     private String ismn;
     private String year;
 
-    @ManyToMany
-    private String publisher;
+    @ManyToOne
+    private Publisher publisher;
 
     @ManyToMany
     private Set<Artist> artists = new HashSet<>();
 
-
     public Song() {
     }
-
-    public Song(String title, String genre, String ismn, String year, String publisher, Set<Artist> artists) {
+    public Song(String title, String genre, String ismn, String year, Publisher publisher) {
+        this.title = title;
+        this.genre = genre;
+        this.ismn = ismn;
+        this.year = year;
+        this.publisher = publisher;
+    }
+    public Song(String title, String genre, String ismn, String year, Publisher publisher, Set<Artist> artists) {
         this.title = title;
         this.genre = genre;
         this.ismn = ismn;
         this.year = year;
         this.publisher = publisher;
         this.artists = artists;
-    }
-
-    public Song(String title, String genre, String ismn, String year, String publisher) {
-        this.title = title;
-        this.genre = genre;
-        this.ismn = ismn;
-        this.year = year;
-        this.publisher = publisher;
     }
 
     public String getTitle() {
@@ -74,14 +72,6 @@ public class Song {
         this.year = year;
     }
 
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
     public Set<Artist> getArtists() {
         return artists;
     }
@@ -90,12 +80,20 @@ public class Song {
         this.artists = artists;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     @Override
@@ -106,8 +104,7 @@ public class Song {
                 ", genre='" + genre + '\'' +
                 ", ismn='" + ismn + '\'' +
                 ", year='" + year + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", artists=" + artists +
+                ", publisher=" + publisher +
                 '}';
     }
 }
