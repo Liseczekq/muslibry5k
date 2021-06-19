@@ -1,4 +1,4 @@
-package model;
+package com.example.muslibry5k.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
