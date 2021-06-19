@@ -8,8 +8,16 @@ import com.example.muslibry5k.respositories.PublisherRespository;
 import com.example.muslibry5k.respositories.SongRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DBInflater implements ApplicationListener<ContextRefreshedEvent> {
+
+    public DBInflater(SongRepository songRepository , ArtistRepository artistRepository, PublisherRespository publisherRepository){
+        this.songRepository = songRepository;
+        this.artistRepository=artistRepository;
+        this.publisherRepository=publisherRepository;
+    }
 
     private SongRepository songRepository;
     private ArtistRepository artistRepository;
@@ -48,21 +56,5 @@ public class DBInflater implements ApplicationListener<ContextRefreshedEvent> {
         songRepository.save(yesterday);
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
